@@ -5,15 +5,15 @@ const parseStringAsArray = require('../utils/parseStringAsArray');
 
 module.exports = {
     async store(req, res) {
-        const { github, techs, latitude, longitude } = req.body;
+        const { github_username, techs, latitude, longitude } = req.body;
 
-        const devExists = await Dev.findOne({ user: github.toLowerCase() });
+        const devExists = await Dev.findOne({ github_username: github_username.toLowerCase() });
 
         if (devExists) {
             return res.json(devExists);
         } else {
 
-            const response = await axios.get(`https://api.github.com/users/${github}`);
+            const response = await axios.get(`https://api.github.com/users/${github_username}`);
 
             const { name = login, bio, avatar_url } = response.data;
             const techsArray = parseStringAsArray(techs);
@@ -24,7 +24,7 @@ module.exports = {
 
             const dev = await Dev.create({
                 name,
-                github,
+                github_username,
                 bio,
                 avatar_url,
                 techs: techsArray,
