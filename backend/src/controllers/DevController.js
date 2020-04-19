@@ -16,7 +16,7 @@ module.exports = {
             const response = await axios.get(`https://api.github.com/users/${github_username}`);
 
             const { name = login, bio, avatar_url } = response.data;
-            const techsArray = parseStringAsArray(techs);
+            const techsArray = parseStringAsArray(techs.toLowerCase());
             const location = {
                 type: 'Point',
                 coordinates: [longitude, latitude]
@@ -24,7 +24,7 @@ module.exports = {
 
             const dev = await Dev.create({
                 name,
-                github_username,
+                github_username: github_username.toLowerCase(),
                 bio,
                 avatar_url,
                 techs: techsArray,
