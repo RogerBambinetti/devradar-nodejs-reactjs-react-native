@@ -4,6 +4,7 @@ import './Main.css';
 import api from '../services/api.js';
 
 import DevItem from '../components/DevItem';
+import Logo from '../assets/logo@3x.png';
 
 
 export default function Main() {
@@ -43,6 +44,7 @@ export default function Main() {
     return (
         <div className="container">
             <aside>
+                <img className="logo" src={Logo} alt=""/>
                 <strong>Register</strong>
                 <form>
                     <div className="input-block">
