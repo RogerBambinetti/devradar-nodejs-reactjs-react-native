@@ -3,7 +3,7 @@
 <img
 		width="200"
 		alt="Logo"
-		src="https://github.com/RogerBambinetti/tindev-nodejs-reactjs-react-native/blob/master/mobile/src/assets/logo%403x.png">
+		src="https://github.com/RogerBambinetti/devradar-nodejs-reactjs-react-native/blob/master/preview/logo.png">
 </h1>
 <h3 align="center">
 	DevRadar - NodeJS - ReactJS - React Native
