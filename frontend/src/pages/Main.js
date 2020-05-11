@@ -4,7 +4,7 @@ import './Main.css';
 import api from '../services/api.js';
 
 import DevItem from '../components/DevItem';
-import Logo from '../assets/logo@3x.png';
+import Logo from '../assets/logo.png';
 
 
 export default function Main() {
