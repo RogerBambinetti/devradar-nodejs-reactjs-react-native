@@ -30,14 +30,13 @@ export default function Main() {
     useEffect(() => {
         async function loadDevs() {
             const response = await api.get('/devs');
-            console.log(response.data);
             setDevs(response.data);
         }
         loadDevs();
     }, []);
 
     async function handleAddDev(e) {
-        e.preventDefault();
+
         const response = await api.post('/devs', { github_username, techs, longitude, latitude });
     }
 
@@ -45,7 +44,6 @@ export default function Main() {
         <div className="container">
             <aside>
                 <img className="logo" src={Logo} alt=""/>
-                <strong>Register</strong>
                 <form>
                     <div className="input-block">
                         <label htmlFor="github_username">Github user</label>
