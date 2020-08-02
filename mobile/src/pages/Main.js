@@ -5,6 +5,7 @@ import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location'
 import { MaterialIcons } from '@expo/vector-icons';
 
 import api from '../services/api';
+import { connect, disconnect, subscribeToNewDevs } from '../services/socket';
 
 export default function Main({ navigation }) {
 
@@ -31,10 +32,21 @@ export default function Main({ navigation }) {
         loadInitialLocation();
     }, []);
 
+    useEffect(() => {
+        subscribeToNewDevs(dev => setDevs([...devs, dev]));
+    }, [devs]);
+
+    function setupWebSocket() {
+        disconnect();
+        const { latitude, longitude } = currentPosition;
+        connect(latitude, longitude, techs);
+    }
+
     async function loadDevs() {
         const { latitude, longitude } = currentPosition;
         const response = await api.get('search', { params: { latitude, longitude, techs } });
         setDevs(response.data);
+        setupWebSocket();
     }
 
     function handlePositionChange(region) {
@@ -53,7 +65,7 @@ export default function Main({ navigation }) {
                         <Image style={styles.avatar} source={{ uri: dev.avatar_url }} />
                         <Callout onPress={() => { navigation.navigate('Profile', { github_username: dev.github_username }) }}>
                             <View style={styles.callout}>
-                <Text style={styles.devName}>{dev.name}</Text>
+                                <Text style={styles.devName}>{dev.name}</Text>
                                 <Text style={styles.devBio}>{dev.bio}</Text>
                                 <Text style={styles.devTechs}>{dev.techs.join(', ')}</Text>
                             </View>
@@ -99,7 +111,7 @@ const styles = StyleSheet.create({
     },
     searchForm: {
         position: 'absolute',
-        bottom: 20,
+        bottom: 35,
         left: 20,
         right: 20,
         zIndex: 5,
