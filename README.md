@@ -50,9 +50,6 @@ The layout is responsive and adapts well to both mobile and desktop devices.
 <p align="center">
   <img src="https://github.com/RogerBambinetti/devradar-nodejs-react-react-native/blob/master/preview/Screenshot0.png" width="700">
 </p>
-<p align="center">
-  <img width="350" src="https://github.com/RogerBambinetti/aircnc-nodejs-react-react-native/blob/master/preview/Screenshot1.png">
-</p>
 
 ## License
 
